@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -26,7 +25,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add a New Habit"
+                    android:text="@string/add_new_habit"
                     android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                     android:textStyle="bold" />
 
@@ -36,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Habit Name*">
+                    android:hint="@string/habit_name_hint">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editHabitName"
@@ -50,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Short Description*">
+                    android:hint="@string/description_hint">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editDescription"
@@ -66,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Goal*">
+                    android:hint="@string/goal_hint">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editGoal"
@@ -80,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="How many to complete this task?"
+                    android:text="@string/goal_helper"
                     android:textAppearance="@style/TextAppearance.Material3.LabelSmall" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Unit*">
+                    android:hint="@string/unit_hint">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editUnit"
@@ -102,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
-                    android:text="e.g., glasses, minutes, pages, meals"
+                    android:text="@string/unit_helper"
                     android:textAppearance="@style/TextAppearance.Material3.LabelSmall" />
 
                 <TextView
@@ -110,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="16dp"
-                    android:text="Select Icon*"
+                    android:text="@string/select_icon"
                     android:textAppearance="@style/TextAppearance.Material3.LabelSmall" />
 
                 <Spinner
@@ -125,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="Create Habit" />
+                    android:text="@string/create_habit" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
