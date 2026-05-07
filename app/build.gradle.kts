@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.vincent.anmp_projectuts"
-    compileSdk = 36 // Diperbarui ke 36 sesuai kebutuhan library terbaru
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.vincent.anmp_projectuts"
         minSdk = 26
-        targetSdk = 36 // Diperbarui ke 36 agar sinkron dengan compileSdk
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -30,11 +30,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
     buildFeatures {
         viewBinding = true
+    }
+}
+
+// Konfigurasi jvmTarget menggunakan compilerOptions DSL yang baru secara global
+// Ini adalah solusi standar untuk migrasi Kotlin 2.0+ di proyek Android
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
     }
 }
 
