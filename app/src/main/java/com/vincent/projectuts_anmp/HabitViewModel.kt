@@ -4,17 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 
 class HabitViewModel : ViewModel() {
-    val habits: LiveData<MutableList<Habit>> = HabitListAdapter.habits
+    val habits: LiveData<MutableList<Habit>> = HabitRepository.habits
 
     fun addHabit(habit: Habit) {
-        HabitListAdapter.addHabit(habit)
+        HabitRepository.addHabit(habit)
     }
 
     fun incrementProgress(index: Int) {
-        HabitListAdapter.updateHabitProgress(index, 1)
+        HabitRepository.updateHabitProgress(index, 1)
     }
 
     fun decrementProgress(index: Int) {
-        HabitListAdapter.updateHabitProgress(index, -1)
+        HabitRepository.updateHabitProgress(index, -1)
     }
 }

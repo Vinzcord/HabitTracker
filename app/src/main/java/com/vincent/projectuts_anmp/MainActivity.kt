@@ -1,4 +1,4 @@
-package com.vincent.anmp_projectuts
+package com.vincent.projectuts_anmp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

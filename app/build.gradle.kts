@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.vincent.anmp_projectuts"
-    compileSdk = 35 // Menggunakan versi stabil
+    compileSdk = 36 // Diperbarui ke 36 sesuai kebutuhan library terbaru
 
     defaultConfig {
         applicationId = "com.vincent.anmp_projectuts"
-        minSdk = 26 // Dinaikkan ke 26 untuk mendukung Adaptive Icons
-        targetSdk = 35
+        minSdk = 26
+        targetSdk = 36 // Diperbarui ke 36 agar sinkron dengan compileSdk
         versionCode = 1
         versionName = "1.0"
 
