@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.vincent.projectuts_anmp"
-    compileSdk = 36
+    namespace = "com.vincent.anmp_projectuts"
+    compileSdk = 35 // Menggunakan versi stabil
 
     defaultConfig {
-        applicationId = "com.vincent.projectuts_anmp"
-        minSdk = 26
-        targetSdk = 36
+        applicationId = "com.vincent.anmp_projectuts"
+        minSdk = 26 // Dinaikkan ke 26 untuk mendukung Adaptive Icons
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -33,15 +33,21 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
