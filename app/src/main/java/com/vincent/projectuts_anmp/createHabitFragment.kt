@@ -1,25 +1,25 @@
 package com.vincent.projectuts_anmp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.vincent.anmp_projectuts.databinding.FragmentCreateHabitBinding
 
 class CreateHabitFragment : Fragment() {
     private var _binding: FragmentCreateHabitBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: HabitViewModel by viewModels()
+    private lateinit var viewModel: HabitViewModel
 
     private val icons = listOf(
-        "Fitness" to android.R.drawable.ic_menu_today,
+        "Books" to android.R.drawable.ic_menu_today,
         "Water" to android.R.drawable.ic_menu_view,
-        "Read" to android.R.drawable.ic_menu_edit,
+        "Exercise" to android.R.drawable.ic_menu_edit,
         "Meditation" to android.R.drawable.ic_menu_compass
     )
 
@@ -28,6 +28,7 @@ class CreateHabitFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCreateHabitBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[HabitViewModel::class.java]
         return binding.root
     }
 
@@ -53,8 +54,14 @@ class CreateHabitFragment : Fragment() {
                 val goal = goalStr.toIntOrNull() ?: 0
                 val iconRes = icons[iconIndex].second
 
-                val newHabit = Habit(name, description, goal, unit, iconRes)
-                viewModel.addHabit(newHabit)
+                val newHabit = Habit(
+                    name = name,
+                    description = description,
+                    goal = goal,
+                    unit = unit,
+                    icon = iconRes
+                )
+                viewModel.insert(newHabit)
 
                 Toast.makeText(context, "Habit Created!", Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()

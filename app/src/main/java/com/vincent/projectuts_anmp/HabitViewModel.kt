@@ -1,20 +1,34 @@
 package com.vincent.projectuts_anmp
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 
-class HabitViewModel : ViewModel() {
-    val habits: LiveData<MutableList<Habit>> = HabitRepository.habits
+class HabitViewModel(application: Application) : AndroidViewModel(application) {
+    private val dao = AppDatabase.getDatabase(application).habitDao()
+    val habits: LiveData<List<Habit>> = dao.getAllHabits().asLiveData()
 
-    fun addHabit(habit: Habit) {
-        HabitRepository.addHabit(habit)
+    fun insert(habit: Habit) = viewModelScope.launch {
+        dao.insertHabit(habit)
     }
 
-    fun incrementProgress(index: Int) {
-        HabitRepository.updateHabitProgress(index, 1)
+    fun update(habit: Habit) = viewModelScope.launch {
+        dao.updateHabit(habit)
     }
 
-    fun decrementProgress(index: Int) {
-        HabitRepository.updateHabitProgress(index, -1)
+    fun getHabitById(id: Int): LiveData<Habit?> {
+        val habit = MutableLiveData<Habit?>()
+        viewModelScope.launch {
+            habit.value = dao.getHabitById(id)
+        }
+        return habit
+    }
+
+    fun updateProgress(habit: Habit, delta: Int) = viewModelScope.launch {
+        val newProgress = habit.currentProgress + delta
+        if (newProgress in 0..habit.goal) {
+            habit.currentProgress = newProgress
+            dao.updateHabit(habit)
+        }
     }
 }

@@ -1,47 +1,58 @@
 package com.vincent.projectuts_anmp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vincent.anmp_projectuts.R
 import com.vincent.anmp_projectuts.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), HabitItemListener {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: HabitViewModel by viewModels()
+    private lateinit var viewModel: HabitViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[HabitViewModel::class.java]
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = HabitListAdapter(
-            onPlusClick = { index -> viewModel.incrementProgress(index) },
-            onMinusClick = { index -> viewModel.decrementProgress(index) }
-        )
+        val adapter = HabitListAdapter(this)
 
         binding.recView.layoutManager = LinearLayoutManager(context)
         binding.recView.adapter = adapter
 
         viewModel.habits.observe(viewLifecycleOwner) { habits ->
-            adapter.submitList(habits.toList())
+            adapter.submitList(habits)
         }
 
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_dashboardFragment_to_createHabitFragment)
+            val action = DashboardFragmentDirections.actionDashboardFragmentToCreateHabitFragment()
+            findNavController().navigate(action)
         }
+    }
+
+    override fun onPlusClick(habit: Habit) {
+        viewModel.updateProgress(habit, 1)
+    }
+
+    override fun onMinusClick(habit: Habit) {
+        viewModel.updateProgress(habit, -1)
+    }
+
+    override fun onTitleClick(habit: Habit) {
+        val action = DashboardFragmentDirections.actionDashboardFragmentToEditHabitFragment(habit.id)
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

@@ -1,117 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardElevation="4dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="habit"
+            type="com.vincent.projectuts_anmp.Habit" />
+        <variable
+            name="listener"
+            type="com.vincent.projectuts_anmp.HabitItemListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_margin="8dp"
+        app:cardElevation="4dp">
 
-        <ImageView
-            android:id="@+id/imgIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:contentDescription="@null"
-            android:src="@android:drawable/ic_menu_help"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtHabitName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            tools:text="Drink Water"
-            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/txtStatus"
-            app:layout_constraintStart_toEndOf="@id/imgIcon"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            tools:text="Stay hydrated throughout the day"
-            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-            app:layout_constraintEnd_toStartOf="@+id/txtStatus"
-            app:layout_constraintStart_toStartOf="@id/txtHabitName"
-            app:layout_constraintTop_toBottomOf="@id/txtHabitName" />
-
-        <TextView
-            android:id="@+id/txtStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/status_background"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="4dp"
-            tools:text="@string/in_progress"
-            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtProgressLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/progress"
-            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtDescription" />
-
-        <TextView
-            android:id="@+id/txtProgressCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="3 / 8 glasses"
-            android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/txtProgressLabel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/txtProgressLabel" />
-
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/progressBar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            tools:progress="37"
-            app:layout_constraintTop_toBottomOf="@id/txtProgressLabel" />
+            android:padding="16dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progressBar">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnMinus"
-                style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="8dp"
+            <ImageView
+                android:id="@+id/imgIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:contentDescription="@null"
-                android:padding="0dp"
-                app:icon="@android:drawable/ic_menu_close_clear_cancel" />
+                android:src="@android:drawable/ic_menu_help"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnPlus"
-                style="@style/Widget.Material3.Button.IconButton.Filled"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:contentDescription="@null"
-                android:padding="0dp"
-                app:icon="@android:drawable/ic_input_add" />
-        </LinearLayout>
+            <TextView
+                android:id="@+id/txtHabitName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:onClick="@{() -> listener.onTitleClick(habit)}"
+                android:text="@{habit.name}"
+                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/txtStatus"
+                app:layout_constraintStart_toEndOf="@id/imgIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Drink Water" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{habit.description}"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                app:layout_constraintEnd_toStartOf="@+id/txtStatus"
+                app:layout_constraintStart_toStartOf="@id/txtHabitName"
+                app:layout_constraintTop_toBottomOf="@id/txtHabitName"
+                tools:text="Stay hydrated throughout the day" />
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/status_background"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:text='@{habit.currentProgress >= habit.goal ? "Completed" : "In Progress"}'
+                android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="In Progress" />
+
+            <TextView
+                android:id="@+id/txtProgressLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Progress"
+                android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtDescription" />
+
+            <TextView
+                android:id="@+id/txtProgressCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{habit.currentProgress + " / " + habit.goal + " " + habit.unit}'
+                android:textAppearance="@style/TextAppearance.Material3.LabelSmall"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/txtProgressLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/txtProgressLabel"
+                tools:text="3 / 8 glasses" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:progress="@{habit.currentProgress * 100 / habit.goal}"
+                app:layout_constraintTop_toBottomOf="@id/txtProgressLabel"
+                tools:progress="37" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progressBar">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnMinus"
+                    style="@style/Widget.Material3.Button.IconButton.Filled.Tonal"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@null"
+                    android:onClick="@{() -> listener.onMinusClick(habit)}"
+                    android:padding="0dp"
+                    app:icon="@android:drawable/ic_menu_close_clear_cancel" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPlus"
+                    style="@style/Widget.Material3.Button.IconButton.Filled"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:contentDescription="@null"
+                    android:onClick="@{() -> listener.onPlusClick(habit)}"
+                    android:padding="0dp"
+                    app:icon="@android:drawable/ic_input_add" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

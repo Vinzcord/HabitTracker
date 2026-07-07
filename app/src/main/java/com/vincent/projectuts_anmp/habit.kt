@@ -1,11 +1,16 @@
 package com.vincent.projectuts_anmp
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "habit")
 data class Habit(
-    val name: String,
-    val description: String,
-    val goal: Int,
-    val unit: String,
-    val icon: Int,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    var name: String,
+    var description: String,
+    var goal: Int,
+    var unit: String,
+    var icon: Int,
     var currentProgress: Int = 0
-) {
-}
+)
