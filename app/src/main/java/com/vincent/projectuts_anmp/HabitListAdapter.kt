@@ -3,7 +3,7 @@ package com.vincent.projectuts_anmp
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.vincent.anmp_projectuts.databinding.ItemHabitBinding
+import com.vincent.projectuts_anmp.databinding.ItemHabitBinding
 
 class HabitListAdapter(
     private val listener: HabitItemListener

@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:progress="@{habit.currentProgress * 100 / habit.goal}"
+                android:progress="@{habit.goal == 0 ? 0 : (habit.currentProgress * 100 / habit.goal)}"
                 app:layout_constraintTop_toBottomOf="@id/txtProgressLabel"
                 tools:progress="37" />
 
@@ -131,7 +131,6 @@
                     android:padding="0dp"
                     app:icon="@android:drawable/ic_input_add" />
             </LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

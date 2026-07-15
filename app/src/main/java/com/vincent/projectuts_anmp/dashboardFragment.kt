@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vincent.anmp_projectuts.databinding.FragmentDashboardBinding
+import com.vincent.projectuts_anmp.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment(), HabitItemListener {
     private var _binding: FragmentDashboardBinding? = null

@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.vincent.anmp_projectuts.databinding.FragmentCreateHabitBinding
+import com.vincent.projectuts_anmp.databinding.FragmentCreateHabitBinding
 
 class CreateHabitFragment : Fragment() {
     private var _binding: FragmentCreateHabitBinding? = null

@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.vincent.anmp_projectuts.R
-import com.vincent.anmp_projectuts.databinding.FragmentLoginBinding
+import com.vincent.projectuts_anmp.R
+import com.vincent.projectuts_anmp.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null

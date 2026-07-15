@@ -2,7 +2,7 @@ package com.vincent.projectuts_anmp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.vincent.anmp_projectuts.databinding.ActivityMainBinding
+import com.vincent.projectuts_anmp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
