@@ -6,7 +6,7 @@
     <data>
         <variable
             name="habit"
-            type="com.vincent.projectuts_anmp.Habit" />
+            type="com.vincent.projectuts_anmp.model.Habit" />
         <variable
             name="listener"
             type="com.vincent.projectuts_anmp.HabitItemListener" />

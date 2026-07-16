@@ -1,0 +1,3 @@
+- [x] Update `fragment_edit_habit.xml` with correct `Habit` type and fix goal binding
+- [x] Update `item_habit.xml` with correct `Habit` type
+- [x] Verify build succeeds

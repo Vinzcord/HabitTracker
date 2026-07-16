@@ -5,7 +5,7 @@
     <data>
         <variable
             name="habit"
-            type="com.vincent.projectuts_anmp.Habit" />
+            type="com.vincent.projectuts_anmp.model.Habit" />
         <variable
             name="listener"
             type="com.vincent.projectuts_anmp.EditHabitListener" />
@@ -79,7 +79,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="number"
-                            android:text="@={`` + habit.goal}" />
+                            android:text="@{String.valueOf(habit.goal)}" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView

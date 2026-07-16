@@ -1,4 +1,4 @@
-package com.vincent.projectuts_anmp
+package com.vincent.projectuts_anmp.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

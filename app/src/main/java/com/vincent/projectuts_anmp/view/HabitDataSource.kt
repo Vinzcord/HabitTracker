@@ -10,7 +10,9 @@ object HabitRepository {
 
     fun addHabit(habit: Habit) {
         val currentList = _habits.value ?: mutableListOf()
-        currentList.add(habit)
+        val newId = if (currentList.isEmpty()) 1 else currentList.maxOf { it.id } + 1
+        val habitWithId = habit.copy(id = newId)
+        currentList.add(habitWithId)
         _habits.value = currentList
     }
 
@@ -19,6 +21,21 @@ object HabitRepository {
         if (index in currentList.indices) {
             val habit = currentList[index]
             habit.currentProgress = (habit.currentProgress + delta).coerceIn(0, habit.goal)
+            _habits.value = currentList
+        }
+    }
+
+    fun getHabitById(id: Int): LiveData<Habit?> {
+        val habit = MutableLiveData<Habit?>()
+        habit.value = _habits.value?.find { it.id == id }
+        return habit
+    }
+
+    fun updateHabit(updatedHabit: Habit) {
+        val currentList = _habits.value ?: return
+        val index = currentList.indexOfFirst { it.id == updatedHabit.id }
+        if (index != -1) {
+            currentList[index] = updatedHabit
             _habits.value = currentList
         }
     }

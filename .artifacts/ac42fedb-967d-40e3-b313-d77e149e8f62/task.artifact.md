@@ -1,0 +1,4 @@
+- [ ] Add Edit Icon to `item_habit.xml` and update `HabitItemListener`
+- [ ] Convert `fragment_edit_habit.xml` to ViewBinding and fix Header/IDs
+- [ ] Convert `EditHabitFragment.kt` to ViewBinding and fix edit logic
+- [ ] Verify build and functionality
