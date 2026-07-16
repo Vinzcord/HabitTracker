@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vincent.projectuts_anmp.databinding.ItemHabitBinding
+import com.vincent.projectuts_anmp.model.Habit
 
 class HabitListAdapter(
     private val listener: HabitItemListener

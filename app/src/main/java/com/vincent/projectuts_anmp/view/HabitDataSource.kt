@@ -2,6 +2,7 @@ package com.vincent.projectuts_anmp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.vincent.projectuts_anmp.model.Habit
 
 object HabitRepository {
     private val _habits = MutableLiveData<MutableList<Habit>>(mutableListOf())

@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.vincent.projectuts_anmp.databinding.FragmentCreateHabitBinding
+import com.vincent.projectuts_anmp.model.Habit
+import com.vincent.projectuts_anmp.viewmodel.HabitViewModel
 
 class CreateHabitFragment : Fragment() {
     private var _binding: FragmentCreateHabitBinding? = null

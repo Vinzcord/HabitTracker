@@ -10,8 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.vincent.projectuts_anmp.R
 import com.vincent.projectuts_anmp.databinding.FragmentEditHabitBinding
+import com.vincent.projectuts_anmp.model.Habit
+import com.vincent.projectuts_anmp.viewmodel.HabitViewModel
 
 class EditHabitFragment : Fragment(), EditHabitListener {
     private lateinit var binding: FragmentEditHabitBinding
