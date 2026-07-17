@@ -37,14 +37,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:onClick="@{() -> listener.onTitleClick(habit)}"
                 android:text="@{habit.name}"
                 android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/txtStatus"
+                app:layout_constraintEnd_toStartOf="@+id/btnEdit"
                 app:layout_constraintStart_toEndOf="@id/imgIcon"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Drink Water" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEdit"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="Edit Habit"
+                android:onClick="@{() -> listener.onEditClick(habit)}"
+                app:icon="@android:drawable/ic_menu_edit"
+                app:layout_constraintBottom_toBottomOf="@id/txtHabitName"
+                app:layout_constraintEnd_toStartOf="@id/txtStatus"
+                app:layout_constraintTop_toTopOf="@id/txtHabitName" />
 
             <TextView
                 android:id="@+id/txtDescription"

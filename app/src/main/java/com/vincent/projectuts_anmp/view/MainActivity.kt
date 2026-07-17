@@ -1,2 +1,12 @@
-package com.vincent.projectuts_anmp.view 
+package com.vincent.projectuts_anmp.view
 
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.vincent.projectuts_anmp.R
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+}

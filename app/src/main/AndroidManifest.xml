@@ -13,7 +13,7 @@
         android:theme="@style/Theme.ProjectUTS_ANMP"
         tools:ignore="DataExtractionRules" >
         <activity
-            android:name="com.vincent.projectuts_anmp.MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true"
             tools:ignore="GoogleAppIndexingWarning" >
             <intent-filter>

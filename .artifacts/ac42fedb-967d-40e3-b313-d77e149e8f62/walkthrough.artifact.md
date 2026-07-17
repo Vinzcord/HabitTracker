@@ -1,44 +1,34 @@
-# Walkthrough - Fixed Unresolved Reference 'insert'
+# Walkthrough - Fixed App Startup and Edit Habit Flow
 
-The "Unresolved reference 'insert'" error was caused by missing methods in `HabitViewModel`. I have added these methods and improved the in-memory repository to handle ID generation correctly.
+I have restored the core functionality of the app which was broken due to an empty `MainActivity` and manifest mismatches. I also implemented a clearer "Edit Habit" flow with a dedicated edit button on the dashboard.
 
 ## Changes Made
 
-### [Habit ViewModel]
+### 1. Fixed App Crash / Startup
+- **[MainActivity.kt](file:///D:/anmp%20project/ANMP_ProjectUTS/app/src/main/java/com/vincent/projectuts_anmp/view/MainActivity.kt)**: Restored the empty activity file with the necessary `AppCompatActivity` setup and `setContentView`.
+- **[AndroidManifest.xml](file:///D:/anmp%20project/ANMP_ProjectUTS/app/src/main/AndroidManifest.xml)**: Updated the `MainActivity` declaration to use the correct package path (`.view.MainActivity`).
 
-#### [HabitViewModel.kt](file:///D:/anmp%20project/ANMP_ProjectUTS/app/src/main/java/com/vincent/projectuts_anmp/viewmodel/HabitViewModel.kt)
-Added the missing `insert` and `updateProgress` methods to bridge the View with the Repository.
+### 2. Improved Dashboard (Edit Entry Point)
+- **[item_habit.xml](file:///D:/anmp%20project/ANMP_ProjectUTS/app/src/main/res/layout/item_habit.xml)**: Added a dedicated **Pencil Icon Button** next to the habit name. Users can now clearly see where to click to edit a habit.
+- **[HabitItemListener.kt](file:///D:/anmp%20project/ANMP_ProjectUTS/app/src/main/java/com/vincent/projectuts_anmp/view/HabitItemListener.kt)**: Renamed `onTitleClick` to `onEditClick` to better reflect the action.
 
-```kotlin
-    fun insert(habit: Habit) {
-        HabitRepository.addHabit(habit)
-    }
-
-    fun updateProgress(habit: Habit, delta: Int) {
-        val currentList = habits.value ?: return
-        val index = currentList.indexOfFirst { it.id == habit.id }
-        if (index != -1) {
-            HabitRepository.updateHabitProgress(index, delta)
-        }
-    }
-```
-
-### [Habit Repository]
-
-#### [HabitDataSource.kt](file:///D:/anmp%20project/ANMP_ProjectUTS/app/src/main/java/com/vincent/projectuts_anmp/view/HabitDataSource.kt)
-Updated `addHabit` to generate a unique ID for each new habit. This is necessary because the `update` functionality relies on the habit's ID to find it in the list.
-
-```kotlin
-    fun addHabit(habit: Habit) {
-        val currentList = _habits.value ?: mutableListOf()
-        val newId = if (currentList.isEmpty()) 1 else currentList.maxOf { it.id } + 1
-        val habitWithId = habit.copy(id = newId)
-        currentList.add(habitWithId)
-        _habits.value = currentList
-    }
-```
+### 3. Fixed Edit Habit Screen
+- **[fragment_edit_habit.xml](file:///D:/anmp%20project/ANMP_ProjectUTS/app/src/main/res/layout/fragment_edit_habit.xml)**:
+    - Converted from DataBinding to standard Layout (ViewBinding) for better consistency with the rest of the app.
+    - Updated the header title to "Edit Habit".
+    - Added proper IDs to all input fields.
+- **[EditHabitFragment.kt](file:///D:/anmp%20project/ANMP_ProjectUTS/app/src/main/java/com/vincent/projectuts_anmp/view/EditHabitFragment.kt)**:
+    - Switched to ViewBinding.
+    - Implemented logic to pre-fill fields when loading a habit.
+    - Fixed the save logic to correctly read from input fields and update the repository.
 
 ## Verification Results
 
-### Automated Tests
-- Ran `:app:compileDebugKotlin` and the build finished successfully.
+### Build Status
+- Ran `:app:assembleDebug` and the build finished successfully.
+
+### Manual Test (Expected)
+- App should open to the Login screen.
+- After login, each habit on the Dashboard will have a pencil icon.
+- Clicking the pencil icon opens the Edit screen with the correct habit data pre-filled.
+- Saving changes updates the Dashboard immediately.

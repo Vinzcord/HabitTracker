@@ -52,7 +52,7 @@ class DashboardFragment : Fragment(), HabitItemListener {
         viewModel.updateProgress(habit, -1)
     }
 
-    override fun onTitleClick(habit: Habit) {
+    override fun onEditClick(habit: Habit) {
         val action = DashboardFragmentDirections.actionDashboardFragmentToEditHabitFragment(habit.id)
         findNavController().navigate(action)
     }
