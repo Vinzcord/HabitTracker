@@ -35,7 +35,7 @@
         tools:layout="@layout/fragment_create_habit" />
     <fragment
         android:id="@+id/editHabitFragment"
-        android:name="com.vincent.projectuts_anmp.EditHabitFragment"
+        android:name="com.vincent.projectuts_anmp.view.EditHabitFragment"
         android:label="Update Habit"
         tools:layout="@layout/fragment_edit_habit">
         <argument

@@ -1,5 +1,6 @@
-package com.vincent.projectuts_anmp
+package com.vincent.projectuts_anmp.view
 
+import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.vincent.projectuts_anmp.EditHabitListener
 import com.vincent.projectuts_anmp.databinding.FragmentEditHabitBinding
 import com.vincent.projectuts_anmp.model.Habit
 import com.vincent.projectuts_anmp.viewmodel.HabitViewModel
@@ -19,39 +21,57 @@ class EditHabitFragment : Fragment(), EditHabitListener {
     private lateinit var viewModel: HabitViewModel
     private var habitId: Int = 0
 
+    private val icons = listOf(
+        "Books" to R.drawable.ic_menu_today,
+        "Water" to R.drawable.ic_menu_view,
+        "Exercise" to R.drawable.ic_menu_edit,
+        "Meditation" to R.drawable.ic_menu_compass
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_habit, container, false)
+        binding = DataBindingUtil.inflate(inflater, com.vincent.projectuts_anmp.R.layout.fragment_edit_habit, container, false)
         viewModel = ViewModelProvider(this)[HabitViewModel::class.java]
-        
-        habitId = arguments?.getInt("habitId") ?: 0
-        
+
+        habitId = EditHabitFragmentArgs.fromBundle(requireArguments()).habitId
+
+        setupSpinnerAdapter()
+
         viewModel.getHabitById(habitId).observe(viewLifecycleOwner) { habit ->
             habit?.let {
                 binding.habit = it
-                setupSpinner(it.icon)
+                selectSpinnerIcon(it.icon)
             }
         }
-        
+
         binding.listener = this
         return binding.root
     }
 
-    private fun setupSpinner(selectedIcon: Int) {
-        val icons = arrayOf("Books", "Water", "Exercise", "Meditation")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, icons)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    private fun setupSpinnerAdapter() {
+        val adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.simple_spinner_item,
+            icons.map { it.first }
+        )
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         binding.spinnerIcon.adapter = adapter
-        
-        // Map icon resource ID back to spinner index or just set a default for now
-        // Ideally, Habit would store the index or string
-        binding.spinnerIcon.setSelection(0) 
+    }
+
+    private fun selectSpinnerIcon(iconRes: Int) {
+        val index = icons.indexOfFirst { it.second == iconRes }
+        if (index >= 0) {
+            binding.spinnerIcon.setSelection(index)
+        }
     }
 
     override fun onSubmit(habit: Habit) {
-        viewModel.update(habit)
+        val selectedIconRes = icons[binding.spinnerIcon.selectedItemPosition].second
+        val updatedHabit = habit.copy(icon = selectedIconRes)
+
+        viewModel.update(updatedHabit)
         Toast.makeText(context, "Habit updated successfully", Toast.LENGTH_SHORT).show()
         findNavController().popBackStack()
     }

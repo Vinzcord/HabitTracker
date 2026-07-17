@@ -79,7 +79,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="number"
-                            android:text="@{String.valueOf(habit.goal)}" />
+                            android:text="@={`` + habit.goal}" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
